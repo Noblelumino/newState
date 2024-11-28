@@ -43,23 +43,23 @@
 
                                         <p class="text-muted mb-4">Enter your email address and password to access admin
                                             panel.</p>
-
-                                        <form action="#">
+<!-- this is the form thats helps the login-->
+                                        <form action="/admin" method="post">
 
                                             <div class="form-group mb-3">
-                                                <label class="form-label" for="emailaddress">Email address</label>
-                                                <input class="form-control" type="email" id="emailaddress" required=""
+                                                <label class="form-label" for="email">Email address</label>
+                                                <input class="form-control" type="email" id="email" name="email"  required=""
                                                     placeholder="Enter your email">
                                             </div>
-
+<!--pass word section -->
                                             <div class="form-group mb-3">
                                                 <a href="pages-recoverpw.html"
                                                     class="text-muted float-end"><small></small></a>
                                                 <label class="form-label" for="password">Password</label>
-                                                <input class="form-control" type="password" required="" id="password"
+                                                <input class="form-control" type="password" required="" id="password" name="password" 
                                                     placeholder="Enter your password">
                                             </div>
-
+<!--the social media icons -->
                                             <div class="form-group mb-3">
                                                 <div class="">
                                                     <input class="form-check-input" type="checkbox" id="checkbox-signin"

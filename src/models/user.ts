@@ -3,7 +3,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 type UserType = 'Admin' | 'User'; // Add other user types here if needed
 
 interface User extends Document {
-    name: string;
+    fname: string;
+    lname: string;
     email: string;
     password: string;
     userType: UserType;
@@ -13,7 +14,11 @@ interface User extends Document {
 
 const userSchema: Schema<User> = new Schema(
     {
-        name: {
+        fname: {
+            type: String,
+            required: true,
+        },
+        lname: {
             type: String,
             required: true,
         },
@@ -21,6 +26,7 @@ const userSchema: Schema<User> = new Schema(
             type: String,
             required: true,
             unique: true,
+            match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'],
         },
         password: {
             type: String,
