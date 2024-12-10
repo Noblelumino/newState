@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
+import bodyParser from 'body-parser'
 
 
 dotenv.config()
@@ -29,15 +30,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 // Enable flash messages
+// Connect flash
 app.use(flash());
 
-// Middleware to pass flash messages to views
-app.use((req, res, next) => {
-    res.locals.successMessage = req.flash('success');
-    res.locals.errorMessage = req.flash('error');
-    next();
-  });
-  
+// Global variables
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 
 // Setting up the view engine to render EJS templates
@@ -54,11 +56,12 @@ app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Import all routes to the server
-import indexRouter from './routes/user/index';
-import propertyRouter from './routes/user/property';
-import adminLogin from './routes/admin/login';
-import register from './routes/admin/register';
-import dashboard from './routes/admin/dashboard';
+import indexRouter from './routes/index';
+import propertyRouter from './routes/property';
+import adminLogin from './routes/login';
+import register from './routes/register';
+import dashboard from './routes/dashboard';
+import addProperty from './routes/addProperty';
 
 // to parse form data sent 
 app.use(express.urlencoded({ extended: true }));
@@ -71,6 +74,7 @@ app.use('/property', propertyRouter);
 app.use ('/login', adminLogin)
 app.use ('/register', register)
 app.use ('/dashboard', dashboard)
+app.use ('/addProperty',addProperty )
 
 // Starting the server
 app.listen(process.env.PORT, () => {

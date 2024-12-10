@@ -1,7 +1,7 @@
 
 import express, { Request, Response, NextFunction } from 'express';
 import argon2 from 'argon2';
-import User from '../../models/user'; // Import the User model
+import User from '../models/user'; // Import the User model
 
 const router = express.Router();
 
@@ -40,7 +40,7 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
         await user.save();
 
         console.log(user); // Debugging
-        res.redirect('admin');
+        res.redirect('login');
     } catch (error) {
         console.error('Error during registration:', error);
         res.redirect('register');

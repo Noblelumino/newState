@@ -44,7 +44,9 @@
                                         <p class="text-muted mb-4">Enter your email address and password to access admin
                                             panel.</p>
 <!-- this is the form thats helps the login-->
-                                        <form action="/admin" method="post">
+<%- include('partials/messages') %>
+                                        <form action="/login" method="post">
+                                           
 
                                             <div class="form-group mb-3">
                                                 <label class="form-label" for="email">Email address</label>

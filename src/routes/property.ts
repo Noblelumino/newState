@@ -14,6 +14,13 @@ router.get('/agent', (req: Request, res: Response) => {
     res.render('property-agent');
 });
 
+
+// router.post('/', (req: Request, res: Request) => {
+//     res.render('')
+// })
+
+
+
 // Posting properties (placeholder for future implementation)
 // router.post('/add', (req: Request, res: Response) => {
 //     // Logic for posting properties will go here
