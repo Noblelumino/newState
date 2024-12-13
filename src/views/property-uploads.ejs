@@ -202,15 +202,15 @@
                                         <h4 class="header-title">Dropzone File Upload</h4>
                                         <p class="sub-header">
                                             DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews.
-                                        </p>
+                                        </p>    
             <!-- this is section hold the area that is responsible for file uploads -->
 
-                                        <form action="/addProperty" method="POST" enctype="multipart/form-data" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+                                        <form action="/addProperty/upload" method="POST" enctype="multipart/form-data" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
                                             data-upload-preview-template="#uploadPreviewTemplate">
 
                                             <div class="form-group mb-3">
                                                 <label class="form-label" for="Pname">PROPERTY NAME</label>
-                                                <input class="form-control" type="text" id="pname" name="pname" required="" placeholder="Enter the property Name">
+                                                <input class="form-control" type="text" id="propertyname" name="propertyname" required="" placeholder="Enter the property Name">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="form-label" for="address"> ADDRESS </label>
@@ -242,7 +242,7 @@
 
 
                                             <div class="fallback">
-                                                <input  type="file" multiple id="images" name="images" accept="image/*" multiple required/>
+                                                <input  type="file" multiple id="files" name="files" accept="image/*" multiple required/>
                                             </div>
 
                                             <div class="dz-message needsclick">

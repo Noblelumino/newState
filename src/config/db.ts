@@ -8,7 +8,7 @@ const option = {
 
 const connectDb = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.MONGO_URI || '', option);
+    await mongoose.connect(process.env.mongo_url || '', option);
     console.log("Database connected successfully");
   } catch (error) {
     console.log(error);

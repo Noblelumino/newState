@@ -1,16 +1,17 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IProperty extends Document {
-    pname: string;
+    propertyName: string;
     address: string;
-    propertytype: string;
+    propertyType: string;
     amount: number;
     description: string;
-    file: string[]; // Array of file paths
+    images:{ url: string; cloudinary_id: string }[]; // Array of images paths
+    
 }
 
 const PropertySchema = new Schema<IProperty>({
-    pname: { 
+    propertyName: { 
         type: String, 
         required: true 
     },
@@ -18,7 +19,7 @@ const PropertySchema = new Schema<IProperty>({
         type: String,
         required: true 
     },
-    propertytype: { 
+    propertyType: { 
         type: String, 
         required: true
      },
@@ -30,10 +31,20 @@ const PropertySchema = new Schema<IProperty>({
         type: String, 
         required: true 
     },
-    file: { 
-        type: [String], 
-        required: true 
-    } // Array to store multiple image paths
+    images:  [
+        {
+          url: {
+            type: String,
+            required: true,
+          },
+          cloudinary_id: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
+        
+    // Array to store multiple image paths
 });
 
 export const Property = mongoose.model<IProperty>('Property', PropertySchema);
