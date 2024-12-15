@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import argon2 from 'argon2';
 import { Strategy as LocalStrategy } from 'passport-local';
 import passport from 'passport';
@@ -10,7 +11,7 @@ declare global {
       id: string;
       email: string;
       password: string;
-      role:string;
+      role: string;
     }
   }
 }
@@ -33,16 +34,14 @@ function initialize(
     email: string,
     password: string,
     done: (
-      error: any,
+      error: unknown,
       user?: Express.User | false,
       options?: { message: string },
     ) => void,
   ) => {
     const user = await getUserByEmail(email);
 
-    
-    console.log(user)
-
+    console.log(user);
 
     if (!user) {
       return done(null, false, { message: 'No user with that email' });
