@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import multer, { FileFilterCallback } from 'multer';
-import path from 'path';
+const path = require('path');
+
 
 // Define the destination for storing files
 const storage = multer.diskStorage({
