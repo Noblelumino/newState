@@ -1,32 +1,28 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
 import dotenv from 'dotenv';
 import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
-import bodyParser from 'body-parser'
 
-
-dotenv.config()
+dotenv.config();
 import connectDb from './config/db';
-connectDb()
-
+connectDb();
 
 // Setting up Express and Port
 const app = express();
 
-
 // Middleware for sessions (required by connect-flash)
 app.use(
-    session({
-      secret: 'your_secret_key', // Replace with your own secret
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
+  session({
+    secret: 'your_secret_key', // Replace with your own secret
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
 
-  // Initialize Passport
+// Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
 // Enable flash messages
@@ -34,13 +30,12 @@ app.use(passport.session());
 app.use(flash());
 
 // Global variables
-app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  res.locals.error = req.flash("error");
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
   next();
 });
-
 
 // Setting up the view engine to render EJS templates
 app.set('view engine', 'ejs');
@@ -63,20 +58,19 @@ import register from './routes/register';
 import dashboard from './routes/dashboard';
 import addProperty from './routes/addProperty';
 
-// to parse form data sent 
+// to parse form data sent
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 // Use routers imported
 app.use('/', indexRouter);
 app.use('/property', propertyRouter);
-app.use ('/login', adminLogin)
-app.use ('/register', register)
-app.use ('/dashboard', dashboard)
-app.use ('/addProperty',addProperty )
+app.use('/login', adminLogin);
+app.use('/register', register);
+app.use('/dashboard', dashboard);
+app.use('/addProperty', addProperty);
 
 // Starting the server
-app.listen(process.env.PORT, () => {
-    console.log(`App running on port ${process.env.PORT}`);
+app.listen(process.env.port, () => {
+  console.log(`App running on port ${process.env.port}`);
 });
