@@ -52,11 +52,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Import all routes to the server
 import indexRouter from './routes/index';
-import propertyRouter from './routes/property';
+import propertyRouter from './routes/property';// user front end  
 import adminLogin from './routes/login';
 import register from './routes/register';
 import dashboard from './routes/dashboard';
 import addProperty from './routes/addProperty';
+import land from './routes/land';
+import house from './routes/houses';
+import shortlet from './routes/shortlet';
 
 // to parse form data sent
 app.use(express.urlencoded({ extended: true }));
@@ -69,6 +72,9 @@ app.use('/login', adminLogin);
 app.use('/register', register);
 app.use('/dashboard', dashboard);
 app.use('/addProperty', addProperty);
+app.use('/land', land);
+app.use('/house', house);
+app.use('/shortlet', shortlet);
 
 // Starting the server
 app.listen(process.env.port, () => {

@@ -21,9 +21,11 @@ router.post('/upload', (req: Request, res: Response) => {
   upload(req, res, async (uploadError) => {
     try {
       if (uploadError) {
-        return res
-          .status(400)
-          .send(`File upload error: ${uploadError.message}`);
+        return res.render('property-uploads', {
+          layout: 'layouts/adminLayout',
+          title: 'Add Property',
+          errorMessage: `File upload error: ${uploadError.message}`,
+        });
       }
 
       const { propertyName, address, propertyType, amount, description } =
@@ -55,11 +57,17 @@ router.post('/upload', (req: Request, res: Response) => {
       await property.save();
       console.log(property);
 
-      return res
-        .status(201)
-        .json({ message: 'Property uploaded successfully', property });
-    } catch {
-      return res.status(500).send('Internal server error occurred');
+      // Redirect back to the form page with a success query parameter
+      return res.redirect('/upload?success=true');
+    } catch (error) {
+      console.error('Error uploading property:', error);
+
+      // Render the page with an error message
+      return res.render('property-uploads', {
+        layout: 'layouts/adminLayout',
+        title: 'Add Property',
+        errorMessage: 'An internal server error occurred. Please try again.',
+      });
     }
   });
 });

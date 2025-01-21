@@ -6,6 +6,7 @@ export interface IProperty extends Document {
     propertyType: string;
     amount: number;
     description: string;
+    createdAt:Date;
     images:{ url: string; cloudinary_id: string }[]; // Array of images paths
     
 }
@@ -30,6 +31,11 @@ const PropertySchema = new Schema<IProperty>({
     description: { 
         type: String, 
         required: true 
+    },
+    createdAt :{
+      type: Date,
+      required: true,
+      default: Date.now
     },
     images:  [
         {
