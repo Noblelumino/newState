@@ -23,13 +23,33 @@ router.get('/',  (req: Request, res: Response): void => {
 });
 
 
-router.post("/", (req : Request, res : Response, next : NextFunction) => {
-    console.log(req.body)
-    passport.authenticate("local", {
-      successRedirect: '/dashboard',
-      failureRedirect: '/login',
-      failureFlash: true,
+router.post("/", (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) return next(err);
+        if (!user) return res.redirect("/login");
+
+         // Log the user object to check its properties
+        console.log("Authenticated User:", user);
+        console.log("User Type:", user.userType);
+
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+
+            req.logIn(user, (err) => {
+                if (err) return next(err);
+    
+                // Ensure userType is properly read
+                if (user.userType?.trim() === "Admin") {
+                    console.log("Redirecting to admin dashboard...");
+                    return res.redirect(`/dashboard?id=${user._id}`);
+                } else {
+                    console.log("Redirecting to home page...");
+                    return res.redirect(`/?id=${user._id}`);
+                }
+            });
+        });
     })(req, res, next);
-  });
+});
+
 
 export default router;

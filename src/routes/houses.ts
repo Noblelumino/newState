@@ -10,7 +10,7 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     // Render the EJS template with the filtered properties
     const landProperties = await Property.find({propertyType : 'house'})
-    console.log(landProperties)
+
     res.render('viewland', {
       layout: 'layouts/adminLayout', // Adjust layout if necessary
       title: 'Houses',

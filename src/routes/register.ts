@@ -12,10 +12,10 @@ router.get('/', (req: Request, res: Response): void => {
 // POST route for submitting registration forms
 router.post('/', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { fname, lname, email, password, role } = req.body;
+    const { fname, lname, email,number, password } = req.body;
 
     // Validate the incoming data
-    if (!fname || !lname || !email || !password || !role) {
+    if (!fname || !lname || !email ||!number || !password ) {
       res.status(400).send('All fields are required');
       return;
     }
@@ -28,8 +28,9 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
       fname,
       lname,
       email,
+      number,
       password: hashedPassword,
-      role,
+    
     });
 
     // Save the user to the database

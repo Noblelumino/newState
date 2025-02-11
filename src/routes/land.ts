@@ -11,7 +11,7 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     // Render the EJS template with the filtered properties
     const landProperties = await Property.find({propertyType : 'land'})
-    console.log(landProperties)
+    //console.log(landProperties)
     res.render('viewland', {
       layout: 'layouts/adminLayout', 
       title: 'Lands',
@@ -25,15 +25,22 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 
-router.get('/detailspage', async (req: Request, res : Response) =>{
-  try {
+router.get('/detailspage/:id', async (req: Request, res : Response) =>{ // passing the id from the 
+  //previous page so as to collect it here 
+
+  try { 
+    const property = await Property.findById(req.params.id)
     res.render('viewdetails',{
       layout: 'layouts/adminLayout',
-      title : 'Details' 
+      title : 'Details', 
+      data: property
     })
   } catch (error) {
     
   }
 })
+
+
+
 
 export default router 
